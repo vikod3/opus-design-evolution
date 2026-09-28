@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aster — stage 1 (Opus 4.6 style)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Stage 1 — the classic "AI SaaS" hero: dark, purple glow, centred gradient text, placeholder dashboard. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0a0a1f}
+body{font-family:Inter,system-ui,sans-serif;color:#fff}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:#0a0a1f}
+html:not(.go) .stage{visibility:hidden}
+
+.glow{position:absolute;border-radius:50%;filter:blur(140px);opacity:.55}
+.g1{width:720px;height:720px;background:#7c3aed;top:-260px;left:180px}
+.g2{width:620px;height:620px;background:#2563eb;top:80px;right:160px}
+.g3{width:520px;height:520px;background:#db2777;top:520px;left:760px;opacity:.28}
+
+nav{position:relative;display:flex;align-items:center;justify-content:space-between;padding:30px 120px}
+.logo{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.logo span{background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.links a{color:#cbd5e1;text-decoration:none;font-size:16px;margin:0 22px}
+.nbtn{background:linear-gradient(90deg,#7c3aed,#2563eb);padding:12px 26px;border-radius:999px;font-weight:600;font-size:15px;color:#fff;text-decoration:none}
+
+.hero{position:relative;text-align:center;padding-top:76px}
+.badge{display:inline-block;padding:9px 18px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.06);font-size:15px;color:#e2e8f0}
+h1{margin-top:30px;font-size:84px;font-weight:800;line-height:1.05;letter-spacing:-1.5px}
+h1 .grad{background:linear-gradient(90deg,#a78bfa,#f472b6,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:21px;color:#94a3b8;max-width:700px;margin:26px auto 0;line-height:1.6}
+.btns{margin-top:40px;display:flex;gap:16px;justify-content:center}
+.btns a{padding:17px 34px;border-radius:12px;font-weight:600;font-size:17px;text-decoration:none;color:#fff}
+.b1{background:linear-gradient(90deg,#7c3aed,#2563eb);box-shadow:0 10px 40px rgba(124,58,237,.45)}
+.b2{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
+
+.mock{position:relative;width:1180px;height:420px;margin:70px auto 0;border-radius:18px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);padding:22px;display:grid;grid-template-columns:220px 1fr 300px;gap:22px}
+.mock::after{content:"";position:absolute;inset:0;border-radius:18px;background:linear-gradient(transparent 40%,#0a0a1f 95%)}
+.col{display:flex;flex-direction:column;gap:14px}
+.bar{height:14px;border-radius:7px;background:rgba(255,255,255,.12)}
+.card{border-radius:12px;background:rgba(255,255,255,.07);height:120px}
+.chart{height:200px;border-radius:12px;background:linear-gradient(180deg,rgba(124,58,237,.35),rgba(37,99,235,.08))}
+
+.go .up{animation:up .9s ease-out both}
+.go .d1{animation-delay:.1s}.go .d2{animation-delay:.2s}.go .d3{animation-delay:.3s}.go .d4{animation-delay:.45s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <nav class="up">
+    <div class="logo">✦ <span>Aster</span></div>
+    <div class="links"><a href="#">Product</a><a href="#">Solutions</a><a href="#">Pricing</a><a href="#">Docs</a></div>
+    <a class="nbtn" href="#">Get Started</a>
+  </nav>
+  <section class="hero">
+    <div class="badge up d1">✨ Introducing Aster AI 2.0 →</div>
+    <h1 class="up d2">Think clearly.<br><span class="grad">Ship faster.</span></h1>
+    <p class="sub up d3">Aster turns scattered notes, docs and chats into one calm workspace your whole team can build on.</p>
+    <div class="btns up d3"><a class="b1" href="#">Start free 🚀</a><a class="b2" href="#">Watch demo</a></div>
+    <div class="mock up d4">
+      <div class="col"><div class="bar" style="width:70%"></div><div class="bar"></div><div class="bar" style="width:80%"></div><div class="bar" style="width:60%"></div><div class="bar" style="width:90%"></div></div>
+      <div class="col"><div class="chart"></div><div class="bar"></div><div class="bar" style="width:75%"></div></div>
+      <div class="col"><div class="card"></div><div class="card"></div></div>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+  var st=document.querySelector('.stage');
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate('+(innerWidth-1920*s)/2+'px,'+(innerHeight-1080*s)/2+'px) scale('+s+')';}
+  fit();addEventListener('resize',fit);
+  function play(){document.documentElement.classList.add('go');}
+  if(location.hash==='#hold')addEventListener('message',function(e){if(e.data==='play')play();});
+  else (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){requestAnimationFrame(play);});
+})();
+</script>
+</body>
+</html>

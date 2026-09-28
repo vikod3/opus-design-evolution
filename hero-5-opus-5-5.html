@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aster — Opus 5.5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Opus 5.5 — cinematic and art-directed: the film carries the idea (scattered notes → one clear light). */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0b0d1c}
+body{font-family:Geist,system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:#0b0d1c}
+html:not(.go) .stage{visibility:hidden}
+:root{--glass:rgba(255,255,255,.1);--glass-line:rgba(255,255,255,.18);--apricot:#ffc59a;
+  --ease:cubic-bezier(.16,1,.3,1);--wipe:cubic-bezier(.76,0,.24,1)}
+
+/* ---- film ---- */
+.film{position:absolute;inset:0;overflow:hidden}
+.film video,.film img{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;transform-origin:50% 0;transform:scale(1.22)}
+.shade-top{position:absolute;left:0;right:0;top:0;height:420px;background:linear-gradient(rgba(8,10,26,.62),rgba(8,10,26,0))}
+.shade-bot{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(rgba(8,10,26,0),rgba(8,10,26,.72))}
+.halo{position:absolute;left:50%;top:330px;width:1100px;height:420px;margin-left:-550px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(10,12,32,.45),rgba(10,12,32,0));pointer-events:none}
+.grain{position:absolute;inset:-60px;opacity:.09;pointer-events:none;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain .8s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-16px,10px)}50%{transform:translate(12px,-18px)}75%{transform:translate(-8px,14px)}100%{transform:translate(0,0)}}
+
+/* ---- nav ---- */
+.brand{position:absolute;left:96px;top:44px;display:flex;align-items:center;gap:12px;font-family:'Instrument Serif';font-size:36px;letter-spacing:-.5px;line-height:1}
+.brand svg{margin-top:-2px}
+.capsule{position:absolute;left:50%;top:38px;transform:translateX(-50%);display:flex;gap:6px;padding:6px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
+.capsule a{padding:11px 20px;border-radius:999px;color:rgba(255,255,255,.86);font-size:15px;text-decoration:none}
+.capsule a.on{background:rgba(255,255,255,.14);color:#fff}
+.nr{position:absolute;right:96px;top:40px;display:flex;align-items:center;gap:26px;font-size:15.5px}
+.nr .si{color:rgba(255,255,255,.82);text-decoration:none}
+.nr .st{background:#fff;color:#0b0d1c;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none}
+
+/* ---- centre ---- */
+.pill{position:absolute;left:50%;top:150px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:6px 18px 6px 6px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);font-size:15px;color:rgba(255,255,255,.9);white-space:nowrap}
+.pill b{background:#fff;color:#0b0d1c;font-weight:600;font-size:13px;padding:5px 11px;border-radius:999px}
+.pill span{opacity:.6}
+h1{position:absolute;left:0;right:0;top:214px;text-align:center;font-family:'Instrument Serif';font-weight:400;font-size:160px;line-height:.93;letter-spacing:-5px;
+  text-shadow:0 4px 60px rgba(8,10,26,.45)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .05em .14em;margin:0 -.05em -.14em}
+.w>span{display:inline-block}
+.w em{font-style:italic}
+.sub{position:absolute;left:50%;top:548px;width:660px;margin-left:-330px;text-align:center;font-size:21px;line-height:1.55;color:rgba(255,255,255,.8);text-shadow:0 2px 30px rgba(8,10,26,.6)}
+.ctas{position:absolute;left:50%;top:640px;transform:translateX(-50%);display:flex;gap:12px}
+.ctas a{display:flex;align-items:center;gap:12px;height:58px;padding:0 28px;border-radius:999px;font-size:17px;font-weight:500;text-decoration:none;white-space:nowrap}
+.cta1{background:#fff;color:#0b0d1c;font-weight:600!important}
+.cta2{color:#fff;background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.cta2 i{width:26px;height:26px;border-radius:50%;background:#fff;display:grid;place-items:center}
+
+/* ---- bottom ---- */
+.lab{position:absolute;bottom:52px;font-family:'Geist Mono';font-size:12px;letter-spacing:.18em;color:rgba(255,255,255,.62)}
+.lab.l{left:96px}
+.lab.l i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--apricot);margin-right:12px;vertical-align:1px;box-shadow:0 0 12px var(--apricot)}
+.logos{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;align-items:center;gap:52px;color:rgba(255,255,255,.55);font-size:22px;font-weight:600;letter-spacing:-.5px;white-space:nowrap}
+.logos .s{font-family:'Instrument Serif';font-weight:400;font-style:italic;font-size:27px;letter-spacing:0}
+.logos .m{font-family:'Geist Mono';font-size:17px;font-weight:500;letter-spacing:.1em}
+.ai{position:absolute;right:96px;bottom:40px;width:372px;padding:16px 18px;border-radius:18px;background:rgba(14,16,36,.42);border:1px solid var(--glass-line);
+  -webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2)}
+.ai .k{display:flex;align-items:center;gap:8px;font-family:'Geist Mono';font-size:11px;letter-spacing:.16em;color:var(--apricot)}
+.ai .k em{margin-left:auto;font-style:normal;color:rgba(255,255,255,.45)}
+.ai .t{margin-top:8px;font-family:'Instrument Serif';font-size:22px;line-height:1.22;min-height:54px}
+.caret{display:inline-block;width:2px;height:.9em;background:var(--apricot);vertical-align:-.1em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---- entrance ---- */
+.go .film video,.go .film img{animation:settle 2.6s cubic-bezier(.22,1,.36,1) both,drift 24s ease-in-out 2.6s infinite alternate}
+.go .film{animation:fade 1.4s ease both}
+.go .brand{animation:wipe .9s var(--wipe) .15s both}
+.go .capsule{animation:cap .9s var(--ease) .25s both}
+.go .nr{animation:down .8s var(--ease) .35s both}
+.go .pill{animation:pill .8s var(--wipe) .45s both}
+.go .w>span{animation:rise 1.2s var(--ease) both}
+.go .w1>span{animation-delay:.55s}.go .w2>span{animation-delay:.63s}.go .w3>span{animation-delay:.71s}.go .w4>span{animation-delay:.79s}
+.go .w em{animation:focus 1.4s cubic-bezier(.22,1,.36,1) both}
+.go .w2 em{animation-delay:.6s}.go .w4 em{animation-delay:.84s}
+.go .sub{animation:up .9s var(--ease) 1s both}
+.go .cta1{animation:shut .8s var(--ease) 1.12s both}
+.go .cta2{animation:shut .8s var(--ease) 1.2s both}
+.go .lab,.go .logos{animation:fade 1s ease 1.35s both}
+.go .ai{animation:card .9s var(--ease) 1.5s both}
+@keyframes fade{from{opacity:0}}
+@keyframes settle{from{transform:scale(1.34)}to{transform:scale(1.22)}}
+@keyframes drift{to{transform:scale(1.27)}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes cap{from{opacity:0;transform:translateX(-50%) translateY(-10px) scale(.96)}to{opacity:1;transform:translateX(-50%)}}
+@keyframes down{from{opacity:0;transform:translateY(-10px)}}
+@keyframes pill{from{opacity:0;clip-path:inset(0 100% 0 0 round 999px)}to{opacity:1;clip-path:inset(0 0 0 0 round 999px)}}
+@keyframes rise{from{transform:translateY(106%)}}
+@keyframes focus{from{filter:blur(14px);opacity:.3}to{filter:blur(0);opacity:1}}
+@keyframes up{from{opacity:0;transform:translateY(20px)}}
+@keyframes shut{from{clip-path:inset(100% 0 0 0 round 999px)}to{clip-path:inset(0 0 0 0 round 999px)}}
+@keyframes card{from{opacity:0;transform:translateY(24px)}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="film">
+    <video id="film" muted loop playsinline autoplay preload="auto"
+      poster="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260928_093307_73620725-9c32-4be1-b3a6-f81563445abf.png"
+      src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5ec18b15-65d4-4a92-ab42-d4d716c7a37d.mp4"></video>
+  </div>
+  <div class="shade-top"></div><div class="shade-bot"></div><div class="halo"></div>
+
+  <div class="brand"><svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 1.5l2.6 10.9L28.5 15l-10.9 2.6L15 28.5l-2.6-10.9L1.5 15l10.9-2.6z" fill="#fff"/></svg>Aster</div>
+  <nav class="capsule"><a class="on" href="#">Product</a><a href="#">Agents</a><a href="#">Customers</a><a href="#">Pricing</a><a href="#">Changelog</a></nav>
+  <div class="nr"><a class="si" href="#">Sign in</a><a class="st" href="#">Start free</a></div>
+
+  <div class="pill"><b>New</b>Aster Agents — now in every workspace <span>→</span></div>
+  <h1>
+    <span class="w w1"><span>Think&nbsp;</span></span><span class="w w2"><span><em>clearly.</em></span></span><br>
+    <span class="w w3"><span>Ship&nbsp;</span></span><span class="w w4"><span><em>faster.</em></span></span>
+  </h1>
+  <p class="sub">Aster turns scattered notes, docs and chats into one calm workspace your whole team can build on.</p>
+  <div class="ctas">
+    <a class="cta1" href="#">Start free</a>
+    <a class="cta2" href="#"><i><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2.5 1.2v7.6L8.8 5z" fill="#0b0d1c"/></svg></i>Watch the film</a>
+  </div>
+
+  <div class="lab l"><i></i>(01) — FROM NOISE TO CLARITY</div>
+  <div class="logos"><span>Halcyon</span><span class="s">Tessera</span><span>oakline</span><span class="m">PARABLE</span><span>Foldwise</span></div>
+  <div class="ai"><div class="k">✦ ASTER AGENT <em>JUST NOW</em></div><div class="t"><span id="typed"></span><span class="caret"></span></div></div>
+
+  <div class="grain"></div>
+</div>
+<script>
+(function(){
+  var st=document.getElementById('stage');
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate('+(innerWidth-1920*s)/2+'px,'+(innerHeight-1080*s)/2+'px) scale('+s+')';}
+  fit();addEventListener('resize',fit);
+
+  /* the film: autoplay isn't reliable on its own, so kick it */
+  var v=document.getElementById('film');
+  function kick(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){});}}
+  v.muted=true;kick();v.addEventListener('canplay',kick);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});
+  ['pointerdown','touchstart','scroll','keydown'].forEach(function(t){addEventListener(t,kick,{once:true,passive:true});});
+
+  /* the agent card types what it just did */
+  var LINES=['Organised 214 notes into 3 decisions and one clear plan.','Found the blocker: onboarding copy. Assigned to Maya.','Summarised 6 threads. Launch moves to Thursday.'];
+  var out=document.getElementById('typed'),li=0;
+  function type(txt,done){var n=0;(function step(){out.textContent=txt.slice(0,++n);if(n<txt.length)setTimeout(step,18+Math.random()*24);else setTimeout(done,2600);})();}
+  function next(){type(LINES[li%LINES.length],function(){li++;next();});}
+
+  function play(){document.documentElement.classList.add('go');kick();setTimeout(next,2000);}
+  if(location.hash==='#hold')addEventListener('message',function(e){if(e.data==='play')play();});
+  else (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){requestAnimationFrame(play);});
+})();
+</script>
+</body>
+</html>

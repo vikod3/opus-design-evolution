@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aster — stage 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Stage 4 — dark and alive: the product promise (scattered → clear) is the hero animation. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#07080a}
+body{font-family:Geist,system-ui,sans-serif;color:#f4f1ea;-webkit-font-smoothing:antialiased}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:#07080a}
+html:not(.go) .stage{visibility:hidden}
+:root{--ink:#f4f1ea;--muted:#8d929b;--dim:#5b6068;--lime:#d6ff5c;--line:rgba(255,255,255,.08);
+  --ease:cubic-bezier(.16,1,.3,1);--snap:cubic-bezier(.7,0,.2,1)}
+
+#field{position:absolute;inset:0}
+.glow{position:absolute;left:980px;top:120px;width:900px;height:860px;background:radial-gradient(closest-side,rgba(214,255,92,.075),transparent 70%);pointer-events:none}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 55% 50%,transparent 55%,rgba(0,0,0,.65));pointer-events:none}
+.grain{position:absolute;inset:-60px;opacity:.07;pointer-events:none;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain .9s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-18px,12px)}40%{transform:translate(14px,-20px)}60%{transform:translate(-10px,-8px)}80%{transform:translate(20px,16px)}100%{transform:translate(0,0)}}
+.spot{position:absolute;width:640px;height:640px;margin:-320px 0 0 -320px;border-radius:50%;background:radial-gradient(closest-side,rgba(244,241,234,.05),transparent);pointer-events:none;opacity:0;transition:opacity .4s}
+
+/* ---- nav ---- */
+nav{position:absolute;left:120px;right:120px;top:0;height:92px;display:flex;align-items:center}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:21px;letter-spacing:-.3px}
+.menu{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:44px;font-family:'Geist Mono';font-size:12px;letter-spacing:.16em;color:var(--muted)}
+.nr{margin-left:auto;display:flex;align-items:center;gap:26px;font-size:15px}
+.nr .si{color:var(--muted)}
+.nr .st{background:var(--ink);color:#07080a;padding:10px 18px;border-radius:999px;font-weight:500}
+.hair{position:absolute;left:0;right:0;top:92px;height:1px;background:var(--line);transform-origin:0 0}
+
+/* ---- copy ---- */
+.eyebrow{position:absolute;left:120px;top:222px;display:flex;align-items:center;gap:12px;font-family:'Geist Mono';font-size:12.5px;letter-spacing:.14em;color:var(--muted)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(214,255,92,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(214,255,92,0)}100%{box-shadow:0 0 0 0 rgba(214,255,92,0)}}
+.eyebrow b{color:var(--ink);font-weight:500}
+h1{position:absolute;left:112px;top:262px;font-family:'Instrument Serif';font-weight:400;font-size:156px;line-height:.96;letter-spacing:-4.5px}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em;margin:0 -.04em -.12em}
+.w>span{display:inline-block}
+.w em{font-style:italic}
+.clearly{display:inline-block}
+.faster{position:relative;display:inline-block}
+.streak{position:absolute;left:.04em;right:.02em;bottom:.1em;height:5px;border-radius:3px;background:var(--lime);transform-origin:0 50%;transform:scaleX(0)}
+.sub{position:absolute;left:120px;top:604px;width:560px;font-size:21px;line-height:1.55;color:#a3a8b0}
+.sub b{color:var(--ink);font-weight:500}
+.ctas{position:absolute;left:120px;top:728px;display:flex;align-items:center;gap:30px}
+.pri{display:flex;align-items:center;gap:14px;background:var(--ink);color:#07080a;padding:8px 8px 8px 28px;border-radius:999px;font-weight:600;font-size:17px;text-decoration:none}
+.pri i{width:42px;height:42px;border-radius:50%;background:#07080a;display:grid;place-items:center;overflow:hidden}
+.pri i svg{transition:transform .35s var(--ease)}
+.pri:hover i svg{transform:translateX(3px)}
+.sec{display:flex;align-items:center;gap:12px;color:var(--ink);font-size:16.5px;text-decoration:none}
+.sec i{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.22);display:grid;place-items:center}
+.trust{position:absolute;left:120px;top:870px;width:700px}
+.trust .spec{font-family:'Geist Mono';font-size:11.5px;letter-spacing:.14em;color:var(--dim)}
+.trust .logos{margin-top:22px;display:flex;gap:44px;font-size:21px;font-weight:600;letter-spacing:-.5px;color:#4e535b}
+.trust .logos span:nth-child(2){font-family:'Instrument Serif';font-weight:400;font-style:italic;font-size:25px;letter-spacing:0}
+.trust .logos span:nth-child(4){font-family:'Geist Mono';font-size:17px;font-weight:500;letter-spacing:.08em}
+
+/* ---- live workspace ---- */
+.win{position:absolute;left:1000px;top:138px;width:800px;height:812px;border-radius:22px;background:rgba(15,16,19,.72);
+  border:1px solid rgba(255,255,255,.09);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.06)}
+.bar{height:54px;display:flex;align-items:center;gap:8px;padding:0 20px;border-bottom:1px solid var(--line)}
+.bar i{width:11px;height:11px;border-radius:50%;background:#2a2c31;display:block}
+.bar .file{margin-left:14px;font-family:'Geist Mono';font-size:12.5px;color:var(--muted)}
+.bar .ai{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:'Geist Mono';font-size:11.5px;letter-spacing:.12em;color:var(--lime);
+  border:1px solid rgba(214,255,92,.25);padding:6px 11px;border-radius:999px}
+.bar .ai::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lime)}
+.doc{position:absolute;left:0;top:54px;right:0;bottom:0}
+.title{position:absolute;left:44px;top:34px;font-family:'Instrument Serif';font-size:46px;letter-spacing:-1px}
+.title small{display:block;margin-top:6px;font-family:'Geist Mono';font-size:11.5px;letter-spacing:.14em;color:var(--dim)}
+.lab{position:absolute;left:44px;font-family:'Geist Mono';font-size:11.5px;letter-spacing:.16em;color:var(--muted)}
+.lab::after{content:"";position:absolute;left:120px;top:50%;width:590px;height:1px;background:var(--line)}
+.title,.lab{opacity:0;transform:translateY(8px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.org .title,.org .lab{opacity:1;transform:none}
+.org .lab{transition-delay:.35s}
+
+.frag{position:absolute;left:0;top:0;height:54px;opacity:0;
+  transition:transform .95s var(--snap),width .95s var(--snap),opacity .5s ease,background-color .6s,border-color .6s}
+.frag .in{height:100%;display:flex;align-items:center;gap:12px;padding:0 16px 0 12px;border-radius:13px;
+  background:#16181c;border:1px solid rgba(255,255,255,.1);box-shadow:0 18px 40px -18px rgba(0,0,0,.8);white-space:nowrap;overflow:hidden;
+  font-size:15px;color:#dcd9d2;transition:background-color .6s,box-shadow .6s}
+.frag .ic{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-family:'Geist Mono';font-size:11px;font-weight:500;color:#07080a}
+.frag .src{margin-left:auto;padding-left:18px;font-family:'Geist Mono';font-size:10.5px;letter-spacing:.14em;color:var(--dim)}
+.scatter .frag .in{animation:drift 5.5s ease-in-out infinite}
+.frag:nth-child(2n) .in{animation-duration:6.5s;animation-direction:reverse}
+.frag:nth-child(3n) .in{animation-duration:4.8s}
+@keyframes drift{50%{transform:translate(6px,-9px) rotate(.6deg)}}
+.org .frag .in{background:rgba(255,255,255,.035);box-shadow:none}
+.wave{display:inline-flex;align-items:center;gap:2px;height:18px;vertical-align:middle}
+.wave b{display:block;width:2.5px;border-radius:2px;background:#9aa0a8}
+
+.sum{position:absolute;left:44px;right:44px;bottom:30px;height:108px;border-radius:14px;padding:16px 20px;
+  background:linear-gradient(90deg,rgba(214,255,92,.09),rgba(214,255,92,.02));border:1px solid rgba(214,255,92,.18);
+  opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.sum.on{opacity:1;transform:none}
+.sum .k{font-family:'Geist Mono';font-size:11px;letter-spacing:.16em;color:var(--lime)}
+.sum .t{margin-top:9px;font-family:'Instrument Serif';font-size:23.5px;line-height:1.2;color:var(--ink)}
+.caret{display:inline-block;width:2px;height:.95em;background:var(--lime);vertical-align:-.12em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---- entrance ---- */
+.go #field{animation:fade 1.6s ease both}
+.go nav>*{animation:down .8s var(--ease) both}
+.go nav>*:nth-child(2){animation-delay:.08s}.go nav>*:nth-child(3){animation-delay:.16s}
+.go .hair{animation:draw 1.2s var(--ease) .1s both}
+.go .eyebrow{animation:up .8s var(--ease) .25s both}
+.go .w>span{animation:rise 1.1s var(--ease) both}
+.go .w1>span{animation-delay:.3s}.go .w2>span{animation-delay:.38s}.go .w3>span{animation-delay:.46s}.go .w4>span{animation-delay:.54s}
+.go .clearly{animation:focus 1.3s cubic-bezier(.22,1,.36,1) .45s both}
+.go .streak{animation:streak 1s cubic-bezier(.7,0,.2,1) 1s both}
+.go .sub{animation:up .9s var(--ease) .75s both}
+.go .ctas{animation:up .9s var(--ease) .88s both}
+.go .trust{animation:up .9s var(--ease) 1s both}
+.go .win{animation:win 1.2s var(--ease) .3s both}
+@keyframes fade{from{opacity:0}}
+@keyframes down{from{opacity:0;transform:translateY(-12px)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+@keyframes rise{from{transform:translateY(108%)}}
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes focus{from{filter:blur(16px);opacity:.25;letter-spacing:.12em}to{filter:blur(0);opacity:1;letter-spacing:-.02em}}
+@keyframes streak{0%{transform:scaleX(0);transform-origin:0 50%}100%{transform:scaleX(1);transform-origin:0 50%}}
+@keyframes win{from{opacity:0;transform:translateY(30px) scale(.98);clip-path:inset(0 0 100% 0 round 22px)}to{opacity:1;transform:none;clip-path:inset(-400px -400px -400px -400px round 22px)}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <canvas id="field" width="1920" height="1080"></canvas>
+  <div class="glow"></div>
+  <div class="vig"></div>
+  <div class="spot" id="spot"></div>
+
+  <nav>
+    <div class="brand"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="#f4f1ea" stroke-opacity=".35"/><path d="M13 3.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z" fill="#d6ff5c"/></svg>Aster</div>
+    <div class="menu"><span>PRODUCT</span><span>AGENTS</span><span>PRICING</span><span>CHANGELOG</span></div>
+    <div class="nr"><span class="si">Sign in</span><span class="st">Start free</span></div>
+  </nav>
+  <div class="hair"></div>
+
+  <div class="eyebrow"><span class="pulse"></span>LIVE — <b id="count">2,184</b> TEAMS THINKING IN ASTER RIGHT NOW</div>
+  <h1>
+    <span class="w w1"><span>Think&nbsp;</span></span><span class="w w2"><span><em class="clearly">clearly.</em></span></span><br>
+    <span class="w w3"><span>Ship&nbsp;</span></span><span class="w w4"><span><em class="faster">faster.<i class="streak"></i></em></span></span>
+  </h1>
+  <p class="sub">Aster turns scattered notes, docs and chats into <b>one calm workspace</b> your whole team can build on.</p>
+  <div class="ctas">
+    <a class="pri" href="#">Start free — it's instant<i><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#f4f1ea" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+    <a class="sec" href="#"><i><svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z" fill="#f4f1ea"/></svg></i>Watch the 90-second demo</a>
+  </div>
+  <div class="trust">
+    <div class="spec">SOC 2 TYPE II · 99.99% UPTIME · 38 MS SEARCH</div>
+    <div class="logos"><span>Halcyon</span><span>Tessera</span><span>oakline</span><span>PARABLE</span><span>Foldwise</span></div>
+  </div>
+
+  <div class="win" id="win">
+    <div class="bar"><i></i><i></i><i></i><span class="file">launch-plan.aster</span><span class="ai">ASTER AI</span></div>
+    <div class="doc scatter" id="doc">
+      <div class="title">Q3 launch plan<small>ORGANISED FROM 6 SOURCES · JUST NOW</small></div>
+      <div class="lab" style="top:136px">DECISIONS</div>
+      <div class="lab" style="top:298px">OWNERS</div>
+      <div class="lab" style="top:460px">BLOCKERS</div>
+      <div id="frags"></div>
+      <div class="sum" id="sum"><div class="k">✦ ASTER · SUMMARY</div><div class="t"><span id="typed"></span><span class="caret"></span></div></div>
+    </div>
+  </div>
+
+  <div class="grain"></div>
+</div>
+<script>
+(function(){
+  var st=document.getElementById('stage');
+  var S=1;
+  function fit(){S=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate('+(innerWidth-1920*S)/2+'px,'+(innerHeight-1080*S)/2+'px) scale('+S+')';}
+  fit();addEventListener('resize',fit);
+
+  /* ---------- fragments: scattered across tools → organised doc ---------- */
+  var F=[ // ic colour, ic text, label, source, scattered [x,y,rot,w], organised y
+    {c:'#e8c6ff',i:'#',  h:'<b style="font-weight:500">Jon</b>&nbsp;·&nbsp;can we ship Thursday?', s:'SLACK', a:[-150,110,-8,330], y:160},
+    {c:'#bff0ff',i:'✉',  h:'Re: legal sign-off — approved ✓',                                   s:'MAIL',  a:[470,40,5,320],   y:222},
+    {c:'#d6ff5c',i:'¶',  h:'Pricing page — Maya owns copy',                                      s:'DOCS',  a:[40,420,4,330],   y:322},
+    {c:'#ffd9a8',i:'◷',  h:'Design review · Wed 3pm — Jon',                                     s:'CAL',   a:[520,300,-6,320], y:384},
+    {c:'#ffb4a8',i:'!',  h:'Onboarding copy still unclear',                                      s:'NOTE',  a:[-90,640,7,310],  y:484},
+    {c:'#c7c9ff',i:'♪',  h:'<span class="wave" id="wv"></span>&nbsp;0:42 · Maya voice note',    s:'VOICE', a:[450,610,-3,320], y:546}];
+  var box=document.getElementById('frags'), els=F.map(function(f,k){
+    var d=document.createElement('div');d.className='frag';
+    d.innerHTML='<div class="in"><span class="ic" style="background:'+f.c+'">'+f.i+'</span><span>'+f.h+'</span><span class="src">'+f.s+'</span></div>';
+    box.appendChild(d);return d;});
+  var wv=document.getElementById('wv');for(var b=0;b<18;b++){var bar=document.createElement('b');bar.style.height=(4+Math.round(Math.abs(Math.sin(b*1.7))*13))+'px';wv.appendChild(bar);}
+  function place(el,x,y,r,w,o){el.style.transform='translate('+x+'px,'+y+'px) rotate('+r+'deg)';el.style.width=w+'px';el.style.opacity=o;}
+  var doc=document.getElementById('doc'), sum=document.getElementById('sum'), typed=document.getElementById('typed');
+  var TEXT='Ship Thursday. Maya owns pricing, Jon clears legal — one blocker left: onboarding copy.';
+  var timers=[];function at(ms,fn){timers.push(setTimeout(fn,ms));}
+  function offscreen(){els.forEach(function(el,k){var a=F[k].a,cx=400,cy=380;place(el,cx+(a[0]-cx)*1.45,cy+(a[1]-cy)*1.45,a[2]*2,a[3],0);el.style.transitionDelay='0s';});}
+  function cycle(){
+    timers.forEach(clearTimeout);timers=[];
+    doc.classList.remove('org');doc.classList.add('scatter');sum.classList.remove('on');typed.textContent='';
+    offscreen();
+    at(60,function(){els.forEach(function(el,k){var a=F[k].a;el.style.transitionDelay=(k*.07)+'s';place(el,a[0],a[1],a[2],a[3],1);});});
+    at(1500,function(){ // snap into structure
+      doc.classList.remove('scatter');doc.classList.add('org');
+      els.forEach(function(el,k){el.style.transitionDelay=(k*.06)+'s';place(el,44,F[k].y,0,712,1);});
+    });
+    at(2350,function(){sum.classList.add('on');});
+    at(2550,function(){var n=0;(function type(){n++;typed.textContent=TEXT.slice(0,n);if(n<TEXT.length)timers.push(setTimeout(type,20+Math.random()*22));})();});
+    at(9000,cycle);
+  }
+  offscreen();
+
+  /* ---------- constellation field ---------- */
+  var cv=document.getElementById('field'),cx=cv.getContext('2d'),P=[];
+  for(var n=0;n<150;n++)P.push({x:Math.random()*1920,y:Math.random()*1080,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.4+.4});
+  function field(){
+    cx.clearRect(0,0,1920,1080);
+    for(var i=0;i<P.length;i++){var p=P[i];
+      p.x+=p.vx;p.y+=p.vy;var dx=1400-p.x,dy=544-p.y;p.vx+=dx*.0000025;p.vy+=dy*.0000025;p.vx*=.999;p.vy*=.999;
+      if(p.x<-20)p.x=1940;if(p.x>1940)p.x=-20;if(p.y<-20)p.y=1100;if(p.y>1100)p.y=-20;}
+    cx.lineWidth=1;
+    for(i=0;i<P.length;i++)for(var j=i+1;j<P.length;j++){var a=P[i],c=P[j],d=Math.hypot(a.x-c.x,a.y-c.y);
+      if(d<130){cx.strokeStyle='rgba(214,255,92,'+(.1*(1-d/130)).toFixed(3)+')';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(c.x,c.y);cx.stroke();}}
+    for(i=0;i<P.length;i++){var q=P[i];cx.fillStyle='rgba(244,241,234,'+(.25+q.r*.25).toFixed(2)+')';cx.beginPath();cx.arc(q.x,q.y,q.r,0,6.283);cx.fill();}
+    requestAnimationFrame(field);
+  }
+
+  /* ---------- live counter + cursor spotlight ---------- */
+  var count=2184,ce=document.getElementById('count');
+  setInterval(function(){count+=1+Math.floor(Math.random()*3);ce.textContent=count.toLocaleString('en-US');},900);
+  var spot=document.getElementById('spot');
+  addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();spot.style.opacity=1;spot.style.left=(e.clientX-r.left)/S+'px';spot.style.top=(e.clientY-r.top)/S+'px';});
+
+  function play(){document.documentElement.classList.add('go');requestAnimationFrame(field);setTimeout(cycle,500);}
+  if(location.hash==='#hold')addEventListener('message',function(e){if(e.data==='play')play();});
+  else (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){requestAnimationFrame(play);});
+})();
+</script>
+</body>
+</html>

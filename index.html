@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Same prompt. Different eye.</title>
+<meta name="description" content="One hero-section prompt, five design stages — Claude Opus 4.6 to Claude Opus 5.5.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#060607;color:#f4f1ea;font-family:Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:72px 24px 56px}
+.wrap{max-width:1240px;margin:0 auto}
+.k{font-family:'Geist Mono';font-size:12.5px;letter-spacing:.2em;color:#8b8f96}
+h1{margin-top:18px;font-family:'Instrument Serif';font-weight:400;font-size:clamp(48px,8vw,104px);line-height:1;letter-spacing:-2px}
+h1 em{font-style:italic}
+.brief{margin-top:20px;font-size:19px;color:#c9c6bf;max-width:680px;line-height:1.5}
+video{display:block;width:100%;margin-top:44px;border-radius:16px;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.grid{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px}
+a.c{display:block;color:inherit;text-decoration:none}
+.c .n{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.c .n b{font-family:'Instrument Serif';font-weight:400;font-size:30px}
+.c .n span{font-family:'Geist Mono';font-size:12px;letter-spacing:.18em;color:#8b8f96}
+.c .f{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.12);background:#111}
+.c .f iframe{position:absolute;left:0;top:0;width:1920px;height:1080px;border:0;transform-origin:0 0;pointer-events:none}
+.c:hover .f{box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+.c.best .n b{color:#d6ff5c}
+.fine{margin-top:56px;font-family:'Geist Mono';font-size:12px;letter-spacing:.18em;color:#5f636a;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="k">SAME PROMPT · FIVE STEPS OF DESIGN</div>
+  <h1>Same prompt. <em>Different eye.</em></h1>
+  <p class="brief">“Design a hero section for Aster, an AI workspace for teams.” Open any of the five live pages below.</p>
+  <video src="opus-design-evolution.mp4" autoplay muted loop playsinline controls></video>
+  <div class="grid">
+    <a class="c" href="hero-1-opus-4-6.html"><div class="n"><b>Claude Opus 4.6</b><span>01</span></div><div class="f"><iframe src="hero-1-opus-4-6.html" loading="lazy" tabindex="-1"></iframe></div></a>
+    <a class="c" href="hero-2-stage-2.html"><div class="n"><b>Claude Opus 4.8</b><span>02</span></div><div class="f"><iframe src="hero-2-stage-2.html" loading="lazy" tabindex="-1"></iframe></div></a>
+    <a class="c" href="hero-3-stage-3.html"><div class="n"><b>Claude Opus 5</b><span>03</span></div><div class="f"><iframe src="hero-3-stage-3.html" loading="lazy" tabindex="-1"></iframe></div></a>
+    <a class="c" href="hero-4-stage-4.html"><div class="n"><b>Claude Fable 5.1</b><span>04</span></div><div class="f"><iframe src="hero-4-stage-4.html" loading="lazy" tabindex="-1"></iframe></div></a>
+    <a class="c best" href="hero-5-opus-5-5.html"><div class="n"><b>Claude Opus 5.5</b><span>05</span></div><div class="f"><iframe src="hero-5-opus-5-5.html" loading="lazy" tabindex="-1"></iframe></div></a>
+  </div>
+  <p class="fine">ILLUSTRATIVE RECREATION · EVERY DESIGN MADE BY CLAUDE OPUS 5.5</p>
+</div>
+<script>
+function fitThumbs(){document.querySelectorAll('.c .f').forEach(function(f){f.firstChild.style.transform='scale('+(f.clientWidth/1920)+')';});}
+fitThumbs();addEventListener('resize',fitThumbs);
+</script>
+</body>
+</html>

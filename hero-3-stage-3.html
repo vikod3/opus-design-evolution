@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aster — stage 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Stage 3 — editorial: display serif, warm paper, asymmetric collage, choreographed motion. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#f2ede4}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#1a1714}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:#f2ede4}
+html:not(.go) .stage{visibility:hidden}
+:root{--ink:#1a1714;--accent:#ff5a1f;--muted:#7a7166;--line:rgba(26,23,20,.14)}
+
+nav{position:absolute;left:0;right:0;top:0;height:96px;display:flex;align-items:center;padding:0 90px;border-bottom:1px solid var(--line)}
+.word{font-family:'Instrument Serif';font-style:italic;font-size:38px;letter-spacing:-.5px}
+.word sup{color:var(--accent);font-size:22px;font-style:normal}
+.links{margin-left:auto;display:flex;gap:40px;font-family:'DM Mono';font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ncta{margin-left:56px;background:var(--ink);color:#f2ede4;padding:13px 22px;border-radius:999px;font-weight:500;font-size:15px;text-decoration:none}
+
+.idx{position:absolute;left:90px;top:150px;font-family:'DM Mono';font-size:13px;letter-spacing:.14em;color:var(--muted)}
+h1{position:absolute;left:84px;top:185px;font-family:'Instrument Serif';font-weight:400;font-size:176px;line-height:.9;letter-spacing:-4px}
+h1 .l{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+h1 .l>span{display:inline-block}
+h1 em{color:var(--accent)}
+.sub{position:absolute;left:92px;top:760px;width:520px;font-size:21px;line-height:1.55;color:#3d3731}
+.btns{position:absolute;left:92px;top:888px;display:flex;align-items:center;gap:28px}
+.btns .p{background:var(--accent);color:#fff;padding:18px 30px;border-radius:999px;font-weight:600;font-size:17px;text-decoration:none}
+.btns .s{color:var(--ink);font-weight:500;font-size:17px;text-decoration:none;border-bottom:1.5px solid var(--ink);padding-bottom:3px}
+
+.cards{position:absolute;left:1040px;top:150px;width:800px;height:760px}
+.c{position:absolute;background:#fffdf8;border:1px solid var(--line);border-radius:18px;padding:24px 26px;box-shadow:0 30px 60px -30px rgba(60,40,20,.35)}
+.c .k{font-family:'DM Mono';font-size:11.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.note{left:40px;top:40px;width:380px;transform:rotate(-4deg);background:#fff4c9}
+.note h5{font-family:'Instrument Serif';font-size:34px;font-weight:400;margin-top:10px}
+.note p{margin-top:10px;font-size:15.5px;line-height:1.6;color:#4a4238}
+.chat{left:330px;top:300px;width:430px;transform:rotate(3deg)}
+.chat .who{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.chat .dot{width:26px;height:26px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:14px}
+.chat p{margin-top:12px;font-family:'Instrument Serif';font-size:28px;line-height:1.2}
+.chat p em{color:var(--accent)}
+.task{left:60px;top:470px;width:360px;transform:rotate(-2deg)}
+.task li{list-style:none;display:flex;gap:12px;align-items:center;margin-top:13px;font-size:15.5px}
+.task li i{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ink);display:grid;place-items:center;font-style:normal;font-size:12px}
+.task li.done{color:var(--muted);text-decoration:line-through}
+.task li.done i{background:var(--ink);color:#fff}
+.sticker{position:absolute;left:640px;top:60px;width:140px;height:140px}
+.sticker svg{width:100%;height:100%}
+
+.marq{position:absolute;left:0;right:0;bottom:0;height:78px;border-top:1px solid var(--line);overflow:hidden;display:flex;align-items:center}
+.track{display:flex;gap:80px;white-space:nowrap;font-family:'Instrument Serif';font-style:italic;font-size:30px;color:#9a9083;padding-left:80px}
+
+/* choreography */
+.go .fade{animation:fade .8s ease both}
+.go h1 .l>span{animation:rise 1.1s cubic-bezier(.16,1,.3,1) both}
+.go h1 .l:nth-child(1)>span{animation-delay:.15s}.go h1 .l:nth-child(2)>span{animation-delay:.27s}.go h1 .l:nth-child(3)>span{animation-delay:.39s}
+.go .sub{animation:up .9s cubic-bezier(.16,1,.3,1) .6s both}
+.go .btns{animation:up .9s cubic-bezier(.16,1,.3,1) .72s both}
+.go .note{animation:drop .9s cubic-bezier(.34,1.4,.64,1) .45s both,f1 6s ease-in-out 1.4s infinite}
+.go .chat{animation:drop2 .9s cubic-bezier(.34,1.4,.64,1) .6s both,f2 7s ease-in-out 1.5s infinite}
+.go .task{animation:drop3 .9s cubic-bezier(.34,1.4,.64,1) .75s both,f3 6.5s ease-in-out 1.6s infinite}
+.go .sticker{animation:pop .7s cubic-bezier(.34,1.56,.64,1) 1s both}
+.go .sticker svg{animation:spin 14s linear infinite}
+.go .track{animation:marq 26s linear infinite}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes drop{from{opacity:0;transform:translateY(-60px) rotate(-14deg)}to{opacity:1;transform:rotate(-4deg)}}
+@keyframes drop2{from{opacity:0;transform:translateY(-60px) rotate(12deg)}to{opacity:1;transform:rotate(3deg)}}
+@keyframes drop3{from{opacity:0;transform:translateY(-60px) rotate(-10deg)}to{opacity:1;transform:rotate(-2deg)}}
+@keyframes f1{50%{transform:rotate(-3deg) translateY(-8px)}}
+@keyframes f2{50%{transform:rotate(2deg) translateY(10px)}}
+@keyframes f3{50%{transform:rotate(-1deg) translateY(-6px)}}
+@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes marq{to{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <nav class="fade">
+    <div class="word">aster<sup>✦</sup></div>
+    <div class="links"><span>Product</span><span>Customers</span><span>Pricing</span><span>Journal</span></div>
+    <a class="ncta" href="#">Start free ↗</a>
+  </nav>
+  <div class="idx fade">(01) — THE CALM WORKSPACE</div>
+  <h1><span class="l"><span>Think</span></span><span class="l"><span><em>clearly,</em></span></span><span class="l"><span>ship faster.</span></span></h1>
+  <p class="sub">Aster turns scattered notes, docs and chats into one calm workspace your whole team can build on.</p>
+  <div class="btns"><a class="p" href="#">Start free</a><a class="s" href="#">Watch demo</a></div>
+
+  <div class="cards">
+    <div class="c note"><div class="k">Monday · standup</div><h5>Meeting notes</h5><p>Pricing page still open. Jon needs final copy by Wed. Research call moved to Friday.</p></div>
+    <div class="c chat"><div class="who"><span class="dot">✦</span>Aster</div><p>Here's what matters: <em>3 decisions</em>, 2 owners, one deadline.</p></div>
+    <div class="c task"><div class="k">This week</div><ul><li class="done"><i>✓</i>Draft launch email</li><li class="done"><i>✓</i>Review onboarding flow</li><li><i></i>Ship pricing page</li></ul></div>
+    <div class="sticker"><svg viewBox="0 0 140 140"><defs><path id="cp" d="M70 70m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs>
+      <circle cx="70" cy="70" r="68" fill="#ff5a1f"/><text font-family="DM Mono" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#cp">NOW WITH AI · NOW WITH AI · </textPath></text>
+      <path d="M70 52l4 14 14 4-14 4-4 14-4-14-14-4 14-4z" fill="#fff"/></svg></div>
+  </div>
+
+  <div class="marq fade"><div class="track">
+    <span>Lumenfold</span><span>Northwind</span><span>Halcyon</span><span>Parable</span><span>Oakline</span><span>Quarry</span><span>Foldwise</span><span>Tessera</span>
+    <span>Lumenfold</span><span>Northwind</span><span>Halcyon</span><span>Parable</span><span>Oakline</span><span>Quarry</span><span>Foldwise</span><span>Tessera</span>
+  </div></div>
+</div>
+<script>
+(function(){
+  var st=document.querySelector('.stage');
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate('+(innerWidth-1920*s)/2+'px,'+(innerHeight-1080*s)/2+'px) scale('+s+')';}
+  fit();addEventListener('resize',fit);
+  function play(){document.documentElement.classList.add('go');}
+  if(location.hash==='#hold')addEventListener('message',function(e){if(e.data==='play')play();});
+  else (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){requestAnimationFrame(play);});
+})();
+</script>
+</body>
+</html>
